@@ -20,6 +20,7 @@ body{
     color: #202124;
     font-size: 22px;
     line-height: 26px;
+    padding-bottom: 16px;
  }   
 
  h2{
@@ -43,6 +44,17 @@ body{
     padding-left: 9px;
     padding-top: 6px;
     text-align: right;}
+
+    .col-3{
+        padding: 0px;
+    }
+    
+    
+    .col-3 .units{
+        position: relative;
+        font-size: 16px;
+        top: -30px;
+    }
  li{
     list-style: none;
  }
@@ -54,4 +66,8 @@ body{
     line-height: 16px;
     padding-left: 9px;
     padding-top: 6px;
+ }
+
+ #current_temp{
+    font-size: 48px;
  }
