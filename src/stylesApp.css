@@ -1,3 +1,4 @@
+
 body{
     font-family: arial,sans-serif;
 }
@@ -10,9 +11,14 @@ body{
     min-height: 100vh;
 }
 
-.weather_app{
+.weather-app-wrapper{
+   max-width: 652px;
+   margin: 30px auto;
+}
+
+.weather-app{
     max-width: 652px;
-    border: 1px solid #dadde1;
+    border: 1px solid #9ea0a3;
     border-radius: 10px;
     padding: 20px;}
 
@@ -36,6 +42,9 @@ body{
     margin:0px;
  }
 
+ a{
+   text-decoration: none;
+ }
  .col-6.info{
     color: #70757a;
     display: inline-block;
@@ -55,6 +64,13 @@ body{
         font-size: 16px;
         top: -30px;
     }
+
+
+    .weather-temperature img{
+   vertical-align: middle;
+    position: relative;
+    top: -6px;
+    }
  li{
     list-style: none;
  }
@@ -68,6 +84,23 @@ body{
     padding-top: 6px;
  }
 
- #current_temp{
+ #temperature{
     font-size: 48px;
+    font-weight: 400;
+    line-height: 1;
+ }
+ #Celsium,#units{
+font-size: 16px;
+
+ }
+
+ #Celsium{
+   position: relative;
+   top: -20px;
+ }
+
+ #units{
+   position: relative;
+   top: 3px;
+   
  }
