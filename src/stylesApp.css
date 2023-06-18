@@ -1,7 +1,9 @@
 
 body{
     font-family: arial,sans-serif;
-}
+      background-color:rgb(200, 200, 244);
+    }
+
 .container{
    
     clear: both;
@@ -17,6 +19,7 @@ body{
 }
 
 .weather-app{
+   background-color: antiquewhite;
     max-width: 652px;
     border: 1px solid #9ea0a3;
     border-radius: 10px;
@@ -51,7 +54,7 @@ body{
     font-size: 12px;
     line-height: 16px;
     padding-left: 9px;
-    padding-top: 6px;
+  
     text-align: right;}
 
     .col-3{
@@ -74,6 +77,16 @@ body{
  li{
     list-style: none;
  }
+
+ .weather-temperature .active{
+color: #202124;
+cursor: default;
+ }
+
+ .weather-temperature .active:hover{
+   text-decoration: none;
+    }
+
  #parameters{
     padding: 0px;
     color: #70757a;

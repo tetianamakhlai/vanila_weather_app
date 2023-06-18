@@ -1,27 +1,3 @@
-function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#temperatures");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
-  let city = document.querySelector("#main_city");
-  city.innerHTML = response.data.name;
-  let feelsLike = document.querySelector("#feels_like");
-  feelsLike.innerHTML = Math.round(response.data.main.feels_like);
-  let wind = document.querySelector("#wind");
-  wind.innerHTML = Math.round(response.data.wind.speed);
-  let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = Math.round(response.data.main.humidity);
-  let description = document.querySelector("#description");
-  description.innerHTML = response.data.weather[0].description;
-  let date = document.querySelector("#date");
-  date.innerHTML = formatDate(response.data.dt * 1000); // Qustion!! the time is late . Why? Why in another lesson we didnt use timestamp parameter
-  let icon = document.querySelector("#icon");
-  icon.setAttribute(
-    // wooow.. interesting... attibute to element JS
-    "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  icon.setAttribute("alt", response.data.weather[0].description);
-}
-
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hrs = date.getHours();
@@ -62,6 +38,34 @@ let minutes = currentTime.getMinutes();
 let time = `${dayOfWeek},${hours}:${minutes}`;
 document.querySelector("#currentTime").innerHTML = time; */
 
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#temperatures");
+  let city = document.querySelector("#main_city");
+  let feelsLike = document.querySelector("#feels_like");
+  let wind = document.querySelector("#wind");
+  let humidity = document.querySelector("#humidity");
+  let description = document.querySelector("#description");
+  let date = document.querySelector("#date");
+  let icon = document.querySelector("#icon");
+
+  celsiusTemperature = response.data.main.temp;
+
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  city.innerHTML = response.data.name;
+  feelsLike.innerHTML = Math.round(response.data.main.feels_like);
+  wind.innerHTML = Math.round(response.data.wind.speed);
+  humidity.innerHTML = Math.round(response.data.main.humidity);
+  description.innerHTML = response.data.weather[0].description;
+  date.innerHTML = formatDate(response.data.dt * 1000); // Qustion!! the time is late . Why? Why in another lesson we didnt use timestamp parameter
+
+  icon.setAttribute(
+    // wooow.. interesting... attibute to element JS
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", response.data.weather[0].description);
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#cityInput");
@@ -74,5 +78,28 @@ function search(city) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
+function showFahrenheitTempr(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let temperatureElement = document.querySelector("#temperatures");
+  temperatureElement.innerHTML = fahrenheitTemperature;
+}
+
+function showCelsiusTempr(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperatures");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", showFahrenheitTempr);
+
+let celsius = document.querySelector("#celsius-link");
+celsius.addEventListener("click", showCelsiusTempr);
+
+search("New York");
