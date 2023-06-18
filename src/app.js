@@ -38,11 +38,10 @@ function formatDate(timestamp) {
   ];
   let dayOfTheWeek = days[date.getDay()];
   if (hrs < 10) {
-    // doesn't work
-    ` 0${hrs}`;
+    hrs = ` 0${hrs}`;
   }
   if (minuts < 10) {
-    `0${minuts}`;
+    minuts = `0${minuts}`;
   }
   return `${dayOfTheWeek}, ${hrs}:${minuts}`;
 }
