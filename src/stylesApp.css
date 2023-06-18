@@ -104,6 +104,10 @@ font-size: 16px;
    top: 3px;
  }
 
- #description{
+ #description::first-letter{
    text-transform: capitalize;
+ }
+ #icon{
+   width: 60px;
+   height: 60px;
  }

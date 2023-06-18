@@ -11,9 +11,14 @@ function displayTemperature(response) {
   humidity.innerHTML = Math.round(response.data.main.humidity);
   let description = document.querySelector("#description");
   description.innerHTML = response.data.weather[0].description;
-
   let date = document.querySelector("#date");
   date.innerHTML = formatDate(response.data.dt * 1000); // Qustion!! the time is late . Why? Why in another lesson we didnt use timestamp parameter
+  let icon = document.querySelector("#icon");
+  icon.setAttribute(
+    // wooow.. interesting... attibute to element JS
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function formatDate(timestamp) {
@@ -32,6 +37,7 @@ function formatDate(timestamp) {
   ];
   let dayOfTheWeek = days[date.getDay()];
   if (hrs < 10) {
+    // doesn't work
     ` 0${hrs}`;
   }
   if (minuts < 10) {
@@ -57,6 +63,6 @@ let time = `${dayOfWeek},${hours}:${minutes}`;
 document.querySelector("#currentTime").innerHTML = time; */
 
 let apiKey = "3b304f6fbf39e6bd217e9118b5adafbf";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Dublin&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
