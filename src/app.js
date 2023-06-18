@@ -63,7 +63,17 @@ let minutes = currentTime.getMinutes();
 let time = `${dayOfWeek},${hours}:${minutes}`;
 document.querySelector("#currentTime").innerHTML = time; */
 
-let apiKey = "3b304f6fbf39e6bd217e9118b5adafbf";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apiKey}&units=metric`;
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#cityInput");
+  search(cityInputElement.value);
+}
 
-axios.get(apiUrl).then(displayTemperature);
+function search(city) {
+  let apiKey = "3b304f6fbf39e6bd217e9118b5adafbf";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
