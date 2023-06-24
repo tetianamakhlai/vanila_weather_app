@@ -91,6 +91,31 @@ function showCelsiusTempr(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach((day) => {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+    <div class="weather-forecast-day">
+    ${day}
+    </div>
+    <img src="https://openweathermap.org/img/wn/10d@2x.png"
+     alt="Clear" id="icon" />
+    <div>
+    <spam id="weather-forecast-max">18° </spam> <spam id="weather-forecast-min">12°</spam>
+  </div>
+  </div>
+  
+`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecast.innerHTML = forecastHTML;
+}
+displayForecast();
 let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
