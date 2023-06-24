@@ -87,6 +87,25 @@ cursor: default;
    text-decoration: none;
     }
 
+    .weather-forecast{
+    text-align: center;
+    color: #202124;
+   }
+
+    .weather-forecast-day
+    {
+      line-height: 15px;
+      padding-top: 7px;
+    }
+
+    #weather-forecast-max, #weather-forecast-min{
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 15px;
+   }
+   #weather-forecast-min{
+   color:rgb(112, 117, 122)}
+   
  #parameters{
     padding: 0px;
     color: #70757a;
