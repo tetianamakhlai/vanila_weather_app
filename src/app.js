@@ -36,7 +36,10 @@ let dayOfWeek = days[currentTime.getDay()];
 let hours = currentTime.getHours();
 let minutes = currentTime.getMinutes();
 let time = `${dayOfWeek},${hours}:${minutes}`;
-document.querySelector("#currentTime").innerHTML = time; */
+document.querySelector("#currentTime").innerHTML = time; 
+ // Set the time zone to UTC
+  date.setUTCHours(date.getHours());
+  date.setUTCMinutes(date.getMinutes());*/
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperatures");
@@ -57,13 +60,20 @@ function displayTemperature(response) {
   humidity.innerHTML = Math.round(response.data.main.humidity);
   description.innerHTML = response.data.weather[0].description;
   date.innerHTML = formatDate(response.data.dt * 1000); // Qustion!! the time is late . Why? Why in another lesson we didnt use timestamp parameter
-
   icon.setAttribute(
-    // wooow.. interesting... attibute to element JS
+    // wooow.. interesting... attribute to element JS
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
+}
+
+function getForecast(coordin) {
+  let apiKey = "25fad9f7e87157d33dde0f82ab269ee8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordin.lat}&lon=${coordin.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function handleSubmit(event) {
@@ -91,31 +101,47 @@ function showCelsiusTempr(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecastWeather = response.data.daily;
   let forecast = document.querySelector("#forecast");
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
   let forecastHTML = `<div class="row">`;
-  days.forEach((day) => {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
+  forecastWeather.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
     <div class="weather-forecast-day">
-    ${day}
+    ${formatDay(forecastDay.dt)}
     </div>
-    <img src="https://openweathermap.org/img/wn/10d@2x.png"
+    <img src="https://openweathermap.org/img/wn/${
+      forecastDay.weather[0].icon
+    }@2x.png"
      alt="Clear" id="icon" />
     <div>
-    <spam id="weather-forecast-max">18° </spam> <spam id="weather-forecast-min">12°</spam>
+    <spam id="weather-forecast-max"> ${Math.round(
+      forecastDay.temp.max
+    )}°</spam> <spam id="weather-forecast-min">${Math.round(
+          forecastDay.temp.min
+        )}°</spam>
   </div>
   </div>
   
 `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
   forecast.innerHTML = forecastHTML;
 }
-displayForecast();
+
 let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
