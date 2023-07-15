@@ -37,9 +37,7 @@ let hours = currentTime.getHours();
 let minutes = currentTime.getMinutes();
 let time = `${dayOfWeek},${hours}:${minutes}`;
 document.querySelector("#currentTime").innerHTML = time; 
- // Set the time zone to UTC
-  date.setUTCHours(date.getHours());
-  date.setUTCMinutes(date.getMinutes());*/
+*/
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperatures");
@@ -60,6 +58,7 @@ function displayTemperature(response) {
   humidity.innerHTML = Math.round(response.data.main.humidity);
   description.innerHTML = response.data.weather[0].description;
   date.innerHTML = formatDate(response.data.dt * 1000); // Qustion!! the time is late . Why? Why in another lesson we didnt use timestamp parameter
+  console.log(response.data.dt * 1000);
   icon.setAttribute(
     // wooow.. interesting... attribute to element JS
     "src",
